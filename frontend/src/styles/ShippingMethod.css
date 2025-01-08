@@ -1,0 +1,63 @@
+/* Container styling */
+.shipping-methods-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.shipping-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Individual shipping method */
+.shipping-method {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.shipping-method:hover {
+  background-color: #f9f9f9;
+}
+
+.shipping-method.selected {
+  border-color: #007bff;
+  background-color: #eaf4ff;
+}
+
+.shipping-method.eco {
+  border-color: green;
+}
+
+.method-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.eco-message {
+  margin-top: 10px;
+  color: green;
+}
+
+/* Continue button */
+.continue-btn {
+  margin-top: 30px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.continue-btn:hover {
+  background-color: #0056b3;
+}

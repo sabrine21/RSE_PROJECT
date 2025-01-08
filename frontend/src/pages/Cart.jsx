@@ -8,14 +8,14 @@ const Cart = ({ cartItems, removeFromCart }) => {
 
   return (
     <div className="cart">
-      <h1>Your Cart</h1>
+      <h1>Votre Panier</h1>
       {cartItems.length === 0 ? (
-        <p>Your cart is empty</p>
+        <p>Votre panier est vide</p>
       ) : (
         <>
           <div className="cart-items">
-            {cartItems.map(item => (
-              <div key={item.id} className="cart-item">
+            {cartItems.map((item, index) => (
+              <div key={`${item.id}-${index}`} className="cart-item">
                 <img src={item.image} alt={item.name} />
                 <div className="item-details">
                   <h3>{item.name}</h3>
@@ -25,7 +25,7 @@ const Cart = ({ cartItems, removeFromCart }) => {
                   onClick={() => removeFromCart(item.id)}
                   className="remove-btn"
                 >
-                  Remove
+                  Supprimer
                 </button>
               </div>
             ))}
@@ -33,10 +33,10 @@ const Cart = ({ cartItems, removeFromCart }) => {
           <div className="cart-summary">
             <h3>Total: ${total.toFixed(2)}</h3>
             <button 
-              onClick={() => navigate('/shipping')}
+              onClick={() => navigate('/shipping-info')}
               className="checkout-btn"
             >
-              Proceed to Shipping
+              Valider le panier
             </button>
           </div>
         </>
@@ -45,4 +45,8 @@ const Cart = ({ cartItems, removeFromCart }) => {
   );
 };
 
+// Ensure the component is exported as a named export as well
+export { Cart };
+
+// Default export remains for flexibility
 export default Cart;

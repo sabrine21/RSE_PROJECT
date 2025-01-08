@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductCard from '../components/ProductCard';
+import { LeafIcon } from '../components/Icons';
 import '../styles/Home.css';
 
 const products = [
@@ -50,9 +51,15 @@ const products = [
 const Home = ({ onAddToCart }) => {
   return (
     <div className="home">
-      <div className="hero">
-        <h1>EcoWear</h1>
-        <p>Sustainable Fashion for a Better Tomorrow</p>
+    <div className="hero">
+        <div className="hero-content">
+          <LeafIcon className="hero-logo" />
+          <h1>EcoWear</h1>
+          <p>Sustainable Fashion for a Better Tomorrow</p>
+          <div className="hero-quote">
+            "Fashion with purpose: Where style meets sustainability, and every purchase makes a difference."
+          </div>
+        </div>
       </div>
       <div className="products-section">
         <h2>Our Sustainable Collection</h2>
