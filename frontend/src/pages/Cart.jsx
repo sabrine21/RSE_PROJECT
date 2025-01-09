@@ -31,11 +31,11 @@ const Cart = ({ cartItems, removeFromCart }) => {
         <>
           <div className="cart-items">
             {cartItems.map((item, index) => (
-              <div key={`${item.id}-${index}`} className="cart-item">
+              <div key={`€{item.id}-€{index}`} className="cart-item">
                 <img src={item.image} alt={item.name} />
                 <div className="item-details">
                   <h3>{item.name}</h3>
-                  <p>${item.price}</p>
+                  <p>€{item.price}</p>
                 </div>
                 <button
                   onClick={() => removeFromCart(item.id)}
@@ -47,7 +47,7 @@ const Cart = ({ cartItems, removeFromCart }) => {
             ))}
           </div>
           <div className="cart-summary">
-            <h3>Total: ${total.toFixed(2)}</h3>
+            <h3>Total: €{total.toFixed(2)}</h3>
             <button onClick={handleCheckout} className="checkout-btn">
               Valider le panier
             </button>

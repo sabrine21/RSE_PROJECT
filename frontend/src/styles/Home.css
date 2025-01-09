@@ -7,11 +7,17 @@
 
 .hero {
   text-align: center;
-  padding: 8rem 2rem;
-  background: linear-gradient(135deg, #2c7a7b 0%, #234e52 100%);
+  padding: 4rem 2rem;
+  background-image: url('https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=2000');
+  background-size: cover;
+  background-position: center;
   color: white;
   position: relative;
   overflow: hidden;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .hero-logo {
   width: 80px;

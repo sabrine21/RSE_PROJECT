@@ -1,12 +1,8 @@
-// src/contexts/AuthContext.jsx
 import React, { createContext, useState, useEffect } from 'react';
 
-// On crée le contexte
 const AuthContext = createContext();
 
-// Le "Provider" qui va envelopper notre application
 export const AuthProvider = ({ children }) => {
-  // État local pour savoir si l'utilisateur est loggé
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -20,7 +16,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('authToken', token);
     setIsAuthenticated(true);
   };
-
 
   const logout = () => {
     localStorage.removeItem('authToken');
