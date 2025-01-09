@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Cart.css';
 
+import AuthContext from '../contexts/AuthContext'; // importer le contexte
+
 const Cart = ({ cartItems, removeFromCart }) => {
   const navigate = useNavigate();
+
+  // Récupérer isAuthenticated
+  const { isAuthenticated } = useContext(AuthContext);
+
   const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+
+  const handleCheckout = () => {
+    if (!isAuthenticated) {
+      // L'utilisateur n'est pas connecté, on l'envoie vers /login
+      navigate('/login');
+    } else {
+      // L'utilisateur est connecté, on peut poursuivre
+      navigate('/shipping-info');
+    }
+  };
 
   return (
     <div className="cart">
@@ -21,7 +37,7 @@ const Cart = ({ cartItems, removeFromCart }) => {
                   <h3>{item.name}</h3>
                   <p>${item.price}</p>
                 </div>
-                <button 
+                <button
                   onClick={() => removeFromCart(item.id)}
                   className="remove-btn"
                 >
@@ -32,10 +48,7 @@ const Cart = ({ cartItems, removeFromCart }) => {
           </div>
           <div className="cart-summary">
             <h3>Total: ${total.toFixed(2)}</h3>
-            <button 
-              onClick={() => navigate('/shipping-info')}
-              className="checkout-btn"
-            >
+            <button onClick={handleCheckout} className="checkout-btn">
               Valider le panier
             </button>
           </div>
@@ -45,8 +58,4 @@ const Cart = ({ cartItems, removeFromCart }) => {
   );
 };
 
-// Ensure the component is exported as a named export as well
-export { Cart };
-
-// Default export remains for flexibility
 export default Cart;

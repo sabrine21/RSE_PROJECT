@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/Login.css';
 
+// On importe le contexte
+import AuthContext from '../contexts/AuthContext';
+
 const Login = () => {
   const navigate = useNavigate();
+
+  // On récupère la fonction `login` depuis le context
+  const { login } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -12,7 +19,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Make request to backend
       const response = await fetch('http://localhost:8080/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -20,18 +26,18 @@ const Login = () => {
       });
 
       if (!response.ok) {
-        // If server returns a bad status, throw error
         throw new Error('Login failed');
       }
 
-      // Example: we might receive a JWT token or user object
+      // Supposons que le backend renvoie un JSON du type { token: "xxx" }
       const data = await response.json();
       console.log('Login successful:', data);
 
-      // If using JWT, store it in localStorage (or context, or cookies, etc.)
-      localStorage.setItem('token', data.token);
+      // On appelle la fonction login du context
+      // Cette fonction va stocker le token et mettre isAuthenticated à true
+      login(data.token);
 
-      // Navigate to home page
+      // Rediriger par exemple vers la page d'accueil
       navigate('/');
     } catch (error) {
       console.error(error);
