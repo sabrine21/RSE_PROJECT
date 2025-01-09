@@ -8,18 +8,44 @@ const Signup = () => {
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert('Passwords do not match');
       return;
     }
-    // TODO: Add registration logic here
-    console.log('Signup attempted:', formData);
-    navigate('/login');
+
+    try {
+      // Make request to backend
+      const response = await fetch('http://localhost:8080/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      // Read the response as JSON, since we are now returning valid JSON
+      const data = await response.json();
+
+      if (!response.ok) {
+        // If the backend returned an error, data.error should exist
+        throw new Error(data.error || 'Signup failed');
+      }
+
+      console.log('Signup successful:', data.message);
+
+      // Navigate to login
+      navigate('/login');
+    } catch (error) {
+      console.error(error);
+      alert(error.message || 'Could not create account. Please try again later.');
+    }
   };
 
   return (
@@ -69,7 +95,9 @@ const Signup = () => {
               type="password"
               id="confirmPassword"
               value={formData.confirmPassword}
-              onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
+              onChange={(e) =>
+                setFormData({...formData, confirmPassword: e.target.value})
+              }
               required
               minLength="6"
             />

@@ -9,11 +9,34 @@ const Login = () => {
     password: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Add authentication logic here
-    console.log('Login attempted:', formData);
-    navigate('/'); // Navigate to the home page after login
+    try {
+      // Make request to backend
+      const response = await fetch('http://localhost:8080/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        // If server returns a bad status, throw error
+        throw new Error('Login failed');
+      }
+
+      // Example: we might receive a JWT token or user object
+      const data = await response.json();
+      console.log('Login successful:', data);
+
+      // If using JWT, store it in localStorage (or context, or cookies, etc.)
+      localStorage.setItem('token', data.token);
+
+      // Navigate to home page
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+      alert('Invalid email or password');
+    }
   };
 
   return (
