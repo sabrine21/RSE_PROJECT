@@ -10,6 +10,7 @@ import ShippingInfo from './pages/ShippingInfo';
 import ShippingMethod from './components/ShippingMethod';
 import Payment from './pages/Payment';
 import ScrollToTop from './components/ScrollToTop'; // Import du composant ScrollToTop
+import CarbonInfo from './components/CarbonInfo';
 import './App.css';
 
 // Import du AuthContext
@@ -57,6 +58,7 @@ function App() {
               <ShoppingBagIcon className="cart-icon" />
               <span>Panier ({cartItems.length})</span>
             </Link>
+            <Link to="/carbon-info">Carbon Info</Link>
 
             {/* Si l'utilisateur est authentifié, on affiche le bouton Logout */}
             {isAuthenticated && (
@@ -99,6 +101,8 @@ function App() {
 
           <Route path="/login" element={<Login />} /> 
           <Route path="/signup" element={<Signup />} />
+          // Route pour la page Carbon Info
+          <Route path="/carbon-info" element={<CarbonInfo />} />
         </Routes>
 
         <Footer />

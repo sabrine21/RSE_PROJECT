@@ -20,6 +20,10 @@ const Navbar = ({ cartItemsCount }) => {
           <ShoppingBagIcon className="cart-icon" />
           <span>Panier ({cartItemsCount})</span>
         </Link>
+        <button className="carbon-link">
+          <Link to="/carbon-info">Carbon Info</Link>
+        </button>
+
       </div>
     </nav>
   );

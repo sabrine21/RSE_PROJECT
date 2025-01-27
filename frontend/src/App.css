@@ -163,6 +163,10 @@
   color: #2d3748;
 }
 
+.nav-links .carbon-link {
+  margin-left: 0.75rem; /* Espace entre Carbon Info et les autres boutons */
+}
+
 .login-page input:focus {
   border-color: #2c7a7b;
   outline: none;
@@ -185,6 +189,33 @@
   background-color: #234e52;
   box-shadow: 0 4px 12px rgba(44, 122, 123, 0.3);
 }
+
+.carbon-link {
+  padding: 0.875rem 1.75rem;
+  background: linear-gradient(135deg, #2c7a7b 0%, #234e52 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(44, 122, 123, 0.2);
+  transition: all 0.3s ease;
+  border: none; /* Supprimez les bordures par défaut */
+  cursor: pointer;
+}
+
+.carbon-link:hover {
+  background: linear-gradient(135deg, #234e52 0%, #1c4044 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(44, 122, 123, 0.3);
+}
+
+.carbon-link a {
+  color: white;
+  text-decoration: none;
+}
+
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
