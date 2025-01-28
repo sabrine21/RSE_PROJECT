@@ -58,7 +58,7 @@ function App() {
               <ShoppingBagIcon className="cart-icon" />
               <span>Panier ({cartItems.length})</span>
             </Link>
-            <Link to="/carbon-info">Carbon Info</Link>
+           
 
             {/* Si l'utilisateur est authentifié, on affiche le bouton Logout */}
             {isAuthenticated && (

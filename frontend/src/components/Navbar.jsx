@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import AuthContext from '../contexts/AuthContext';
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 import '../App.css';
@@ -20,10 +19,6 @@ const Navbar = ({ cartItemsCount }) => {
           <ShoppingBagIcon className="cart-icon" />
           <span>Panier ({cartItemsCount})</span>
         </Link>
-        <button className="carbon-link">
-          <Link to="/carbon-info">Carbon Info</Link>
-        </button>
-
       </div>
     </nav>
   );

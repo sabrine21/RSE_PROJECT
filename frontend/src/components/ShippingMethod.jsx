@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import '../styles/ShippingMethod.css';
 
@@ -66,9 +67,15 @@ const ShippingMethod = () => {
           </div>
         ))}
       </div>
-      <button className="continue-btn" onClick={handleContinue}>
-        Continuer avec {selectedMethod.name}
-      </button>
+      <div className="buttons-container">
+        <Link to="/carbon-info" className="carbon-link">
+           En savoir plus sur l'empreinte carbone
+        </Link>
+
+        <button className="continue-btn" onClick={handleContinue}>
+          Continuer avec {selectedMethod.name}
+        </button>
+      </div>
     </div>
   );
 };
