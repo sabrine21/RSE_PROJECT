@@ -11,6 +11,7 @@ const Cart = ({ cartItems, removeFromCart }) => {
   const { isAuthenticated } = useContext(AuthContext);
 
   const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+  const totalweight = cartItems.reduce((sum, item) => sum + parseFloat(item.weight), 0);
 
   const handleCheckout = () => {
     if (!isAuthenticated) {
@@ -35,6 +36,7 @@ const Cart = ({ cartItems, removeFromCart }) => {
                 <img src={item.image} alt={item.name} />
                 <div className="item-details">
                   <h3>{item.name}</h3>
+                  <p>{item.weight}kg</p>
                   <p>€{item.price}</p>
                 </div>
                 <button
@@ -47,7 +49,8 @@ const Cart = ({ cartItems, removeFromCart }) => {
             ))}
           </div>
           <div className="cart-summary">
-            <h3>Total: €{total.toFixed(2)}</h3>
+            <h3>Total weight of the package: {totalweight} kg</h3>
+            <h3>Total price: €{total.toFixed(2)}</h3>
             <button onClick={handleCheckout} className="checkout-btn">
               Valider le panier
             </button>

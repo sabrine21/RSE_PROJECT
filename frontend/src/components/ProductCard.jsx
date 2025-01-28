@@ -8,6 +8,7 @@ const ProductCard = ({ product, onAddToCart }) => {
       <div className="product-info">
         <h3>{product.name}</h3>
         <p><strong>Supplier:</strong> {product.supplier}</p>
+        <p><strong>Weight:</strong>{product.weight}kg</p>
         <p>{product.description}</p>
         <p className="price">€{product.price}</p>
         <button onClick={() => onAddToCart(product)} className="add-to-cart-btn">
