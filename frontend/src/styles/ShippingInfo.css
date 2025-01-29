@@ -1,0 +1,203 @@
+/* 🌿 Style général de la page */
+.shipping-info {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: #f9fafb;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* ✨ Animation d'apparition */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* 🏷️ Titre principal */
+.shipping-info h1 {
+  text-align: center;
+  color: #234e52;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+/* 📦 Formulaire */
+.shipping-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 🏗️ Grille des champs */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+/* 🌱 Groupe de champs */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* 🔹 Champs en pleine largeur */
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+/* 🎨 Labels */
+.form-group label {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+/* 📌 Champs de saisie */
+.form-group input,
+.form-group select {
+  padding: 0.8rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+  background: #f7fafc;
+}
+
+/* 🎯 Focus sur champs */
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #38b2ac;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.3);
+}
+
+/* 🚀 Boutons radio pour le choix de livraison */
+.delivery-options {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+.delivery-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.delivery-options input {
+  accent-color: #38b2ac;
+  transform: scale(1.2);
+}
+
+/* 🌟 Bouton de soumission */
+.continue-btn {
+  background: linear-gradient(135deg, #38b2ac 0%, #2c7a7b 100%);
+  color: white;
+  padding: 1.25rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+/* 🎭 Effet de survol */
+.continue-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(56, 178, 172, 0.3);
+}
+
+/* 🎛️ Responsive : Adaptation mobile */
+@media (max-width: 768px) {
+  .form-grid {
+      grid-template-columns: 1fr;
+  }
+
+  .shipping-info {
+      padding: 1.5rem;
+  }
+
+  .continue-btn {
+      font-size: 1rem;
+      padding: 1rem;
+  }
+}
+
+/* 🎯 Conteneur du récapitulatif */
+.recap-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #edf2f7;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* 📜 Titre du récapitulatif */
+.recap-container h2 {
+  font-size: 1.8rem;
+  color: #2d3748;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* 📦 Carte du récapitulatif */
+.recap-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* 🎭 Icônes et mise en forme du texte */
+.recap-card p {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-weight: 500;
+  color: #2d3748;
+}
+
+/* 🛒 Icônes du récapitulatif */
+.recap-card p::before {
+  font-size: 1.4rem;
+}
+
+/* 📍 Icône pour le centre de distribution */
+.recap-card p:nth-child(1)::before {
+  content: "🏢";
+}
+
+/* ⚖️ Icône pour le poids */
+.recap-card p:nth-child(2)::before {
+  content: "⚖️";
+}
+
+/* 🚛 Icône pour la distance */
+.recap-card p:nth-child(3)::before {
+  content: "🚛";
+}
