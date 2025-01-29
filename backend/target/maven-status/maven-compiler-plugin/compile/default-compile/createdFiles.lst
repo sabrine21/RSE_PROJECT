@@ -1,0 +1,7 @@
+com\example\ecowear\controller\ShippingController.class
+com\example\ecowear\ServletInitializer.class
+com\example\ecowear\model\User.class
+com\example\ecowear\controller\AuthController.class
+com\example\ecowear\EcowearApplication.class
+com\example\ecowear\repository\UserRepository.class
+com\example\ecowear\service\AuthService.class
