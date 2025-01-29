@@ -34,7 +34,7 @@ public class CarbonEmissionService {
             throw new IllegalArgumentException("Unknown transport mode: " + transportMode);
         }
         return EMISSION_FACTORS.get(transportMode) * packageWeight * distance;
-    }
+    } 
 
     private double calculateDistance(String address1, String address2) {
         String url = "https://nominatim.openstreetmap.org/search?format=json&q=";

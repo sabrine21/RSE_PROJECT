@@ -7,7 +7,7 @@ const shippingMethods = [
     id: 1,
     type: 'eco',
     name: 'Eco-Friendly Delivery',
-    price: 5.99,
+    price: 10,
     carbonFootprint: 0.5,
     deliveryTime: '3-5 days',
   },
@@ -15,7 +15,7 @@ const shippingMethods = [
     id: 2,
     type: 'standard',
     name: 'Standard Delivery',
-    price: 7.99,
+    price: 5,
     carbonFootprint: 2.1,
     deliveryTime: '2-3 days',
   },
@@ -23,7 +23,7 @@ const shippingMethods = [
     id: 3,
     type: 'express',
     name: 'Express Delivery',
-    price: 12.99,
+    price: 7,
     carbonFootprint: 4.5,
     deliveryTime: '1-2 days',
   },
@@ -53,7 +53,7 @@ const ShippingMethod = () => {
       } catch (error) {
         console.error("Error calculating carbon footprint:", error);
       } finally {
-        setLoading(false); // Désactiver l'état de chargement une fois terminé
+        setLoading(false); 
       }
     };
 
@@ -68,6 +68,8 @@ const ShippingMethod = () => {
 
   return (
     <div className="shipping-methods-container">
+      <h1>Modes de livraison</h1>
+      <p>Sélectionnez un mode de livraison. 🌱 L'option éco est mise en valeur pour son impact minimal sur l'environnement.</p>
       {loading ? (
         // Afficher un indicateur de chargement pendant le calcul
         <div className="loading-message">
@@ -81,53 +83,49 @@ const ShippingMethod = () => {
 
 {/* Méthode Eco-Friendly */}
 <div
-          className={`shipping-method ${selectedMethod.id === 1 ? 'selected' : ''} eco`}
+          className={`shipping-method €{selectedMethod.id === 1 ? 'selected' : ''} eco`}
           onClick={() => setSelectedMethod(shippingMethods[0])}
         >
           <div className="method-header">
             <h3>{shippingMethods[0].name}</h3>
-            <span className="carbon-footprint">CO2: {CalculatedcarbonFootprint.toFixed(2)}kg</span>
+            <span className="carbon-footprint">CO2: {CalculatedcarbonFootprint.toFixed(2)}g</span>
           </div>
           <p className="delivery-time">Délai de livraison : {shippingMethods[0].deliveryTime}</p>
-          <p className="price">Prix : ${shippingMethods[0].price.toFixed(2)}</p>
+          <p className="price">Prix : €{shippingMethods[0].price.toFixed(2)}</p>
+          <p className="eco-message">
+                🌱 Option écologique : Ce mode utilise des transports verts pour minimiser l'impact environnemental.
+              </p>
         </div>
 
         {/* Méthode Standard */}
         <div
-          className={`shipping-method ${selectedMethod.id === 2 ? 'selected' : ''}`}
+          className={`shipping-method €{selectedMethod.id === 2 ? 'selected' : ''}`}
           onClick={() => setSelectedMethod(shippingMethods[1])}
         >
           <div className="method-header">
             <h3>{shippingMethods[1].name}</h3>
-            <span className="carbon-footprint">CO2: {shippingMethods[1].carbonFootprint.toFixed(2)}kg</span>
+            <span className="carbon-footprint">CO2: {shippingMethods[1].carbonFootprint.toFixed(2)}g</span>
           </div>
           <p className="delivery-time">Délai de livraison : {shippingMethods[1].deliveryTime}</p>
-          <p className="price">Prix : ${shippingMethods[1].price.toFixed(2)}</p>
+          <p className="price">Prix : €{shippingMethods[1].price.toFixed(2)}</p>
         </div>
 
         {/* Méthode Express */}
         <div
-          className={`shipping-method ${selectedMethod.id === 3 ? 'selected' : ''}`}
+          className={`shipping-method €{selectedMethod.id === 3 ? 'selected' : ''}`}
           onClick={() => setSelectedMethod(shippingMethods[2])}
         >
           <div className="method-header">
             <h3>{shippingMethods[2].name}</h3>
-            <span className="carbon-footprint">CO2: {shippingMethods[2].carbonFootprint.toFixed(2)}kg</span>
+            <span className="carbon-footprint">CO2: {shippingMethods[2].carbonFootprint.toFixed(2)}g</span>
           </div>
           <p className="delivery-time">Délai de livraison : {shippingMethods[2].deliveryTime}</p>
-          <p className="price">Prix : ${shippingMethods[2].price.toFixed(2)}</p>
+          <p className="price">Prix : €{shippingMethods[2].price.toFixed(2)}</p>
         </div>
-
-
-
-
-
-
-
 
       </div>
       <div className="buttons-container">
-        <Link to="/carbon-info" className="carbon-link">
+        <Link to="/carbon-info" className="continue-btn">
           En savoir plus sur l'empreinte carbone
         </Link>
         <button className="continue-btn" onClick={handleContinue}>
