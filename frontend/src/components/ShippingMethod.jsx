@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../styles/ShippingMethod.css';
-
-// Shipping Methods Data
+import axios from 'axios';
 const shippingMethods = [
   {
     id: 1,
@@ -32,50 +30,112 @@ const shippingMethods = [
 ];
 
 const ShippingMethod = () => {
-  const [selectedMethod, setSelectedMethod] = useState(shippingMethods[0]); // Default to the first method
-  const navigate = useNavigate(); // React Router's navigation hook
+  const location = useLocation();
+  const navigate = useNavigate();
+  const totalWeight = location.state?.totalWeight || 0;
+  const [selectedMethod, setSelectedMethod] = useState(shippingMethods[0]);
+  const [CalculatedcarbonFootprint, setCalculatedcarbonFootprint] = useState(0);
+  const [loading, setLoading] = useState(true); 
+
+  console.log("total weight",totalWeight);
+
+  useEffect(() => {
+    const calculateCarbonFootprint = async () => {
+      try {
+        setLoading(true);
+        console.log("sending request to calculate");
+        const response = await axios.post('http://localhost:8080/api/emissions/calculate', {
+          sellerAddress: "15 Rue de la Gare, 76300 Sotteville-lès-Rouen", // Adresse du vendeur
+          clientAddress: location.state?.address || "5 Avenue du Mont Riboudet, 76000 Rouen", // Adresse du client
+          packageWeight: totalWeight
+        });
+        setCalculatedcarbonFootprint(response.data.totalEmissions);
+      } catch (error) {
+        console.error("Error calculating carbon footprint:", error);
+      } finally {
+        setLoading(false); // Désactiver l'état de chargement une fois terminé
+      }
+    };
+
+    calculateCarbonFootprint();
+  }, [totalWeight, location.state?.address]);
+  console.log("carbon footprint",CalculatedcarbonFootprint);
 
   const handleContinue = () => {
-    console.log('Selected Shipping Method:', selectedMethod);
-
-    // Redirect to the payment page
-    navigate('/payment', { state: { selectedMethod } }); // Pass selectedMethod as state
+    navigate('/payment', { state: { selectedMethod, totalWeight } });
   };
+
 
   return (
     <div className="shipping-methods-container">
-      <h1>Modes de livraison</h1>
-      <p>Sélectionnez un mode de livraison. 🌱 L'option éco est mise en valeur pour son impact minimal sur l'environnement.</p>
+      {loading ? (
+        // Afficher un indicateur de chargement pendant le calcul
+        <div className="loading-message">
+          <p>Calcul de l'empreinte carbone en cours...</p>
+          <div className="spinner"></div> {/* Optionnel : Ajouter une animation de chargement */}
+        </div>
+      ) : (
+        // Afficher les méthodes de livraison une fois le calcul terminé
+        <>
       <div className="shipping-methods">
-        {shippingMethods.map((method) => (
-          <div
-            key={method.id}
-            className={`shipping-method ${selectedMethod.id === method.id ? 'selected' : ''} ${method.type === 'eco' ? 'eco' : ''}`}
-            onClick={() => setSelectedMethod(method)}
-          >
-            <div className="method-header">
-              <h3>{method.name}</h3>
-              <span className="carbon-footprint">CO2: {method.carbonFootprint}kg</span>
-            </div>
-            <p className="delivery-time">Délai de livraison : {method.deliveryTime}</p>
-            <p className="price">Prix : ${method.price.toFixed(2)}</p>
-            {method.type === 'eco' && (
-              <p className="eco-message">
-                🌱 Option écologique : Ce mode utilise des transports verts pour minimiser l'impact environnemental.
-              </p>
-            )}
+
+{/* Méthode Eco-Friendly */}
+<div
+          className={`shipping-method ${selectedMethod.id === 1 ? 'selected' : ''} eco`}
+          onClick={() => setSelectedMethod(shippingMethods[0])}
+        >
+          <div className="method-header">
+            <h3>{shippingMethods[0].name}</h3>
+            <span className="carbon-footprint">CO2: {CalculatedcarbonFootprint.toFixed(2)}kg</span>
           </div>
-        ))}
+          <p className="delivery-time">Délai de livraison : {shippingMethods[0].deliveryTime}</p>
+          <p className="price">Prix : ${shippingMethods[0].price.toFixed(2)}</p>
+        </div>
+
+        {/* Méthode Standard */}
+        <div
+          className={`shipping-method ${selectedMethod.id === 2 ? 'selected' : ''}`}
+          onClick={() => setSelectedMethod(shippingMethods[1])}
+        >
+          <div className="method-header">
+            <h3>{shippingMethods[1].name}</h3>
+            <span className="carbon-footprint">CO2: {shippingMethods[1].carbonFootprint.toFixed(2)}kg</span>
+          </div>
+          <p className="delivery-time">Délai de livraison : {shippingMethods[1].deliveryTime}</p>
+          <p className="price">Prix : ${shippingMethods[1].price.toFixed(2)}</p>
+        </div>
+
+        {/* Méthode Express */}
+        <div
+          className={`shipping-method ${selectedMethod.id === 3 ? 'selected' : ''}`}
+          onClick={() => setSelectedMethod(shippingMethods[2])}
+        >
+          <div className="method-header">
+            <h3>{shippingMethods[2].name}</h3>
+            <span className="carbon-footprint">CO2: {shippingMethods[2].carbonFootprint.toFixed(2)}kg</span>
+          </div>
+          <p className="delivery-time">Délai de livraison : {shippingMethods[2].deliveryTime}</p>
+          <p className="price">Prix : ${shippingMethods[2].price.toFixed(2)}</p>
+        </div>
+
+
+
+
+
+
+
+
       </div>
       <div className="buttons-container">
         <Link to="/carbon-info" className="carbon-link">
-           En savoir plus sur l'empreinte carbone
+          En savoir plus sur l'empreinte carbone
         </Link>
-
         <button className="continue-btn" onClick={handleContinue}>
           Continuer avec {selectedMethod.name}
         </button>
       </div>
+        </>
+      )}
     </div>
   );
 };

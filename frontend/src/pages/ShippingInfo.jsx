@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState  } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/ShippingInfo.css';
 
 const ShippingInfo = ({ onSubmit }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -15,10 +16,11 @@ const ShippingInfo = ({ onSubmit }) => {
     country: ''
   });
 
+  console.log("formData",formData);
+  console.log('total weight in shipping info',location.state?.totalWeight);
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent form reload
-    onSubmit(formData); // Pass the data to the parent component
-    navigate('/shipping-method'); // Navigate to the next step
+    e.preventDefault();
+    navigate('/shipping-method', { state: { address: formData.address, totalWeight: location.state?.totalWeight } });
   };
 
   return (
@@ -138,8 +140,5 @@ const ShippingInfo = ({ onSubmit }) => {
   );
 };
 
-// Ensure the component is exported as a named export as well
-export { ShippingInfo };
 
-// Default export remains for flexibility
 export default ShippingInfo;
