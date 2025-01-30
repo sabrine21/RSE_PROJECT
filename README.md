@@ -3,7 +3,7 @@ E-commerce eco-friendly website
 
 ## Mannuel Utilisateur pour le démarrage du projet 
 
-1. Clonner le projet : `clone `
+1. Clonner le projet : `clone https://github.com/sabrine21/RSE_PROJECT.git `
 2. Naviguer au dossier du projet et changer la branche :
    -   `cd chemin du dossier`
    -   `git checkout develop`
